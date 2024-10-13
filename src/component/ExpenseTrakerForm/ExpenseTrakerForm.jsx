@@ -1,18 +1,44 @@
+import { useState } from "react";
 const ExpenseTrakerForm = () => {
+  const [isActiveButton, setIsActiveButton] = useState("Expense");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const handleActiveClick = (category) => {
+    // category.preventdefault();
+    setIsActiveButton(category);
+  };
+
   return (
     <div className="p-6 py-8 bg-[#F9FAFB] border rounded-md">
       <h2 className="text-3xl font-semibold leading-7 text-gray-800 text-center">
         Expense Tracker
       </h2>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex divide-x divide-slate-400/20 overflow-hidden rounded-md bg-white text-[0.8125rem] font-medium leading-5 text-slate-700 shadow-sm ring-1 ring-slate-700/10 mt-6">
-          <div className="cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 active">
+          <button
+            className={`cursor-pointer text-center flex-1 px-4 py-2  ${
+              isActiveButton === "Expense"
+                ? "bg-[#0d9488] text-white"
+                : "bg-white"
+            }`}
+            onClick={() => handleActiveClick("Expense")}
+          >
             Expense
-          </div>
-          <div className="cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900">
+          </button>
+          <button
+            className={`cursor-pointer text-center flex-1 px-4 py-2  ${
+              isActiveButton === "Income"
+                ? "bg-[#0d9488] text-white"
+                : "bg-white"
+            }`}
+            onClick={() => handleActiveClick("Income")}
+          >
             Income
-          </div>
+          </button>
         </div>
 
         <div className="mt-3">
