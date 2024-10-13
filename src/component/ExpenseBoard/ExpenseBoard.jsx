@@ -1,4 +1,18 @@
+import { useState } from "react";
+import ExpenseInputModal from "./ExpenseInputModal";
+import ExpenseTextModal from "./ExpenseTextModal";
 const ExpenseBoard = () => {
+  const [isOpenTextModal, setIsOpenTextModal] = useState(false);
+  const [isOpenInputModal, setIsOpenInputModal] = useState(false);
+
+  const handleClickTextModal = () => {
+    console.log(" open modal");
+    setIsOpenTextModal(!isOpenTextModal);
+  };
+
+  const handleClickInputModal = () => {
+    setIsOpenInputModal(!isOpenInputModal);
+  };
   return (
     <div className="border rounded-md">
       <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -40,6 +54,7 @@ const ExpenseBoard = () => {
                 id="menu-button2"
                 aria-expanded="true"
                 aria-haspopup="true"
+                onClick={handleClickTextModal}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -70,26 +85,7 @@ const ExpenseBoard = () => {
               aria-labelledby="menu-button2"
               tabIndex="-1"
             >
-              <div className="py-1" role="none">
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
-                  role="menuitem"
-                  tabIndex="-1"
-                  id="menu-item-0"
-                >
-                  Low to High
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
-                  role="menuitem"
-                  tabIndex="-1"
-                  id="menu-item-0"
-                >
-                  High to Low
-                </a>
-              </div>
+              {isOpenTextModal && <ExpenseTextModal />}
             </div>
           </div>
 
@@ -101,6 +97,7 @@ const ExpenseBoard = () => {
                 id="filter-button-2"
                 aria-expanded="true"
                 aria-haspopup="true"
+                onClick={handleClickInputModal}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -136,32 +133,7 @@ const ExpenseBoard = () => {
               tabIndex="-1"
               id="filter-dropdown2"
             >
-              <div className="py-1" role="none">
-                <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                    id="filter-option-1"
-                  />
-                  <span className="ml-2">Education</span>
-                </label>
-                <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                    id="filter-option-2"
-                  />
-                  <span className="ml-2">Food</span>
-                </label>
-                <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                    id="filter-option-3"
-                  />
-                  <span className="ml-2">Health</span>
-                </label>
-              </div>
+              {isOpenInputModal && <ExpenseInputModal />}
             </div>
           </div>
         </div>
